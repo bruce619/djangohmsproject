@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Edit Profile {% endblock %}
+
+{% block content %}
+    <section id="main" class="container medium">
+        <h2><strong>Edit Profile</strong></h2>
+            {% for field in form %}
+				{% for error in field.errors %}
+					<div class="alert alert-danger alert-dismissable">
+						<p><strong style="color: red">{{ error|escape }}</strong></p>
+					</div>
+				{% endfor %}
+			{% endfor %}
+			{% if form.non_field_errors %}
+				<div class="alert alert-danger alert-dismissable">
+					<p><strong style="color: red">{{form.non_field_errors}}</strong></p>
+				</div>
+			{% endif %}
+        <div class="box">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row gtr-50 gtr-uniform">
+                {% for field in form %}
+                    <div class="col-12 col-12-narrower">
+                        <label for="id_{{ field.name }}">{{ field.label }}</label>
+                        <input type="{{ field.field.widget.input_type }}"
+                                   class="form-control"
+                                   name="{{ field.name }}"
+                                   id="id_{{ field.name }}"
+                                   value="{{ field.value }}"
+                                   placeholder="{{ field.field.widget.attrs.placeholder }}">
+                    </div>
+                {% endfor %}
+                <div class="col-12">
+                    <ul class="actions special">
+                        <li><input type="submit" value="Update" /></li>
+                    </ul>
+                </div>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

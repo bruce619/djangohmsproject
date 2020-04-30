@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}Update Patient{% endblock %}
+{% load static %}
+
+{% block content %}
+<section id="main" class="container medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="heading">Update patient data</h1>
+            </div>
+        </div>
+    </div>
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="{% url 'create-patient' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissable">
+                <a href="{% url 'create-patient' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="box">
+				<form method="post" action="">
+					{% csrf_token %}
+                    <div class="row gtr-50 gtr-uniform">
+                        <div class="col-12 col-12-narrower">
+                            <label>{{ form.first_name.label }}</label>
+                            {{form.first_name}}
+                        </div>
+                         <div class="col-12 col-12-narrower">
+                            <label>{{ form.middle_name.label }}</label>
+                            {{form.middle_name}}
+                        </div>
+                         <div class="col-12 col-12-narrower">
+                            <label>{{ form.last_name.label }}</label>
+                            {{form.last_name}}
+                        </div>
+                        <div class="col-12 col-12-narrower">
+                            <label>{{ form.date_of_birth.label }}
+                                <small class="text-muted">
+                                (yyyy-mm-dd)
+                                </small>
+                            </label>
+                            {{form.date_of_birth}}
+                        </div>
+                        <div class="col-12 col-12-narrower">
+                            <label>{{ form.address.label }}</label>
+                            {{form.address}}
+                        </div>
+                        <div class="col-12 col-12-narrower">
+                            <label >{{ form.gender.label }}</label>
+                            {{form.gender}}
+                        </div>
+                        <div class="col-12 col-12-narrower">
+                            <label>{{ form.phone_number.label }}</label>
+                            {{form.phone_number}}
+                        </div>
+                        <div class="col-12 col-12-narrower">
+                            <label>{{ form.blood_group.label }}</label>
+                               {{ form.blood_group}}
+                        </div>
+                        <div class="col-12 col-12-narrower">
+                            <label>{{ form.genotype.label }}</label>
+                            {{ form.genotype}}
+                        </div>
+                        <div class="col-12 col-12-narrower">
+							<input type="checkbox" id="record_status" name="record_status">
+							<label for="record_status">{{ form.record_status.label }}</label>
+						</div>
+						<div class="col-12">
+							<ul class="actions special">
+								<li><input type="submit" value="Update" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+
+
+</section>
+
+
+{% endblock %}

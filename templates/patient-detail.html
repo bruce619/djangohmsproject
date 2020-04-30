@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}Patient Details{% endblock %}
+{% load static %}
+
+{% block content %}
+<section id="main" class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading text-center">Patient Details</h1>
+                    <p class="lead text-center"><b>{{ object.first_name }} {{ object.middle_name }} {{ object.last_name }} Details</b></p>
+                </div>
+            </div>
+        </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-right mb-5"><a href="{% url 'create-medical-history' object.id %}" class="btn btn-success">
+                    <i class="fa fa-plus"></i>Create Medical History</a>
+            </div>
+            <div class="col-lg-12">
+                <div class="table-responsive">
+                    <table class="alt">
+                        <thead>
+                            <tr>
+                                <th>Patient ID</th>
+                                <th>Date of Birth</th>
+                                <th>Address</th>
+                                <th>Gender</th>
+                                <th>Phone Number</th>
+                                <th>Blood Group</th>
+                                <th>Geno-type</th>
+                                <th>Record Status</th>
+                                <th>Treat/Discharge Patient</th>
+                                <th>Medical History</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td>
+                                        {{ object.id }}
+                                    </td>
+                                    <td>
+                                        {{ object.date_of_birth }}
+                                    </td>
+                                    <td>
+                                        {{ object.address }}
+                                    </td>
+                                    <td>
+                                        {{ object.gender }}
+                                    </td>
+                                    <td>
+                                        {{ object.phone_number }}
+                                    </td>
+                                    <td>
+                                        {{ object.blood_group }}
+                                    </td>
+                                    <td>
+                                        {{ object.genotype }}
+                                    </td>
+                                    {% if object.record_status %}
+                                    <td>
+                                        <span class="badge badge-success">Treated and Discharged</span>
+                                    </td>
+                                    {% else %}
+                                    <td>
+                                        <span class="badge badge-secondary">Undergoing Treatment</span>
+                                    </td>
+                                    {% endif %}
+                                    <td>
+                                        {% if object.record_status %}
+                                             <a href="{% url 'record-status-admit' object.id %}" class="btn btn-outline-white-secondary">
+                                                <i class="fa fa-check-circle"></i>
+                                                <span class="hidden-xs hidden-sm">Treat</span>
+                                            </a><br>
+                                        {% else %}
+                                            <a href="{% url 'record-status-discharge' object.id %}" class="btn btn-outline-white-secondary">
+                                                <i class="fa fa-check"></i>
+                                                <span class="hidden-xs hidden-sm"></span>Discharge
+                                            </a><br>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'medical-history-list' object.id %}" class="btn btn-outline-white-secondary">
+                                            <i class="fa fa-history" aria-hidden="true"></i>
+                                            <span class="hidden-xs hidden-sm">Medical </span>Records
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'patient-update' object.id %}" class="btn btn-outline-white-secondary">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                        <a href="{% url 'patient-delete' object.id %}" class="btn btn-outline-white-secondary">
+                                            <i class="fa fa-trash"></i>Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

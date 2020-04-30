@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Patient List{% endblock %}
+{% load bootstrap %}
+
+{% block content %}
+<section class="job-form-section job-form-section--compressed">
+    <div class="container">
+        <h4 class="heading"><span class="accent">Patient</span> List</h4>
+        <div class="col-md-6">
+            <form method="get" enctype="multipart/form-data">
+                <fieldset class="form-group">
+                    {{ filter.form|bootstrap }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-white-primary job-main-form__button" type="submit"><i class="fa fa-search"></i>Find Patient</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        {% if object_list %}
+            {% for patient in object_list %}
+                <ul class="job-listings mb-5">
+                  <li class="job-listing d-block d-sm-flex pb-3 pb-sm-0 align-items-center">
+                        <a class="mr-2" href="{% url 'patient-detail' patient.id %}"></a>
+                    <div class="job-listing-logo">
+                        <img src="{% static 'css/images/small.png' %}" alt="ShareBoardd " class="img-fluid">
+                    </div>
+                    <div class="job-listing-about d-sm-flex custom-width w-100 justify-content-between mx-4">
+                      <div class="job-listing-position custom-width w-50 mb-3 mb-sm-0">
+                          <h4><b>{{ patient.first_name }} {{ patient.middle_name }} {{ patient.last_name }} Medical Records</b></h4>
+                      </div>
+                        <div class="col-10 col-md-3 col-lg-3 ml-auto">
+                            <p>Posted {{ patient.date_created|timesince }}</p>
+                        </div>
+                    </div>
+                  </li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <br>
+            <p><b>Sorry, ID doesn't match any patient</b></p>
+        {% endif %}
+
+        {% if is_paginated %}
+
+            {% if page_obj.has_previous %}
+                <a style="background: #00ABF0;" class="btn btn-info mb-4" href="?{{ queries.urlencode }}&amp;page=1">First</a>
+                <a style="background: #00ABF0;"  class="btn btn-info mb-4" href="?{{ queries.urlencode }}&amp;page={{ page_obj.previous_page_number }}">&laquo; Previous</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <a style="background: #00ABF0;"  class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a style="background: #00ABF0;"  class="btn btn-info mb-4" href="?{{ queries.urlencode }}&amp;page={{ num }}">{{ num }}</a>
+                {% endif %}
+            {% endfor %}
+
+
+             {% if page_obj.has_next %}
+                <a style="background: #00ABF0;"  class="btn btn-info mb-4" href="?{{ queries.urlencode }}&amp;page={{ page_obj.next_page_number }}">Next</a>
+                <a style="background: #00ABF0;"  class="btn btn-info mb-4" href="?{{ queries.urlencode }}&amp;page={{ page_obj.paginator.num_pages }}">Last &laquo;</a>
+             {% endif %}
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}

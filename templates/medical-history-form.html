@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}{{title}}{% endblock %}
+{% load static %}
+
+{% block content %}
+<section id="main" class="container medium">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="heading">Create a new Medical Record</h1>
+            </div>
+        </div>
+    </div>
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <div class="alert alert-danger alert-dismissable">
+                    <a href="{% url 'create-medical-history' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="box">
+				<form method="post" action="">
+					{% csrf_token %}
+                    <div class="row gtr-50 gtr-uniform">
+                        <div class="col-12 col-12-narrower">
+                            <label>{{ form.medical_problem.label }}</label>
+                            {{form.medical_problem}}
+                        </div>
+                         <div class="col-12 col-12-narrower">
+                            <label>{{ form.allergies.label }}</label>
+                            {{form.allergies}}
+                        </div>
+                         <div class="col-12 col-12-narrower">
+                            <label>{{ form.medications.label }}</label>
+                            {{form.medications}}
+                        </div>
+                        <div class="col-12 col-12-narrower">
+                            <label>{{ form.comment.label }}</label>
+                            {{form.comment}}
+                        </div>
+						<div class="col-12">
+							<ul class="actions special">
+								<li><input type="submit" value="Create" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+
+
+</section>
+
+
+{% endblock %}

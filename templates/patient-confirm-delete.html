@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Patient Delete{% endblock %}
+{% load static %}
+
+{% block content %}
+<section id="main" class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h1 class="heading text-center">Confirm Patient Delete</h1>
+                </div>
+            </div>
+        </div>
+</section>
+<section>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+                <fieldset class="form-group">
+                     <legend class="border-bottom mb-4">Delete Patient</legend>
+                        <h4>Are you sure you want to delete {{ object.first_name }} {{ object.middle_name }} {{ object.last_name }} Details</h4>
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-group-vertical btn-sm btn-danger" type="submit">Yes, Delete</button>
+                    <button class="btn btn-group-vertical btn-sm btn-warning"><a href="{% url 'patient-detail' object.id %}">Cancel</a></button>
+                </div>
+        </form>
+    </div>
+</section>
+
+
+
+
+
+{% endblock %}
