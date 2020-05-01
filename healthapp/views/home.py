@@ -1,8 +1,42 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from healthapp.forms import ContactForm
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
 
 
 def home(request):
-    return render(request, 'home.html', {})
+    form_class = ContactForm
+    # new logic!
+    if request.method == 'POST':
+        form = form_class(data=request.POST)
+        if form.is_valid():
+            name = request.POST.get(
+                'name'
+                , '')
+            email = request.POST.get(
+                'email'
+                , '')
+            message = request.POST.get('message', '')
+            # Email the profile with the
+            # contact information
+            template = get_template('contact_template.txt')
+            context = {
+                'name': name,
+                'email': email,
+                'message': message,
+            }
+            content = template.render(context)
+
+            email = EmailMessage(
+                "New contact form submission",
+                content,
+                "HEALTH FOR ALL" + '',
+                ['tipstar3@gmail.com'],
+                headers={'Reply-To': email}
+            )
+            email.send()
+            return redirect('home')
+    return render(request, 'home.html', {'form': form_class})
 
 
 def error_404(request, exception):

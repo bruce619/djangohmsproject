@@ -24,6 +24,7 @@ SECRET_KEY = 'r-6%7e1^kzo^ashkqa3jrqeyi0_##p&qm79(oczb!!5sob+6#6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -143,8 +144,8 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_PATH, 'static')
 ]
 # Media directory
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # A bootstrap 4 form
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -156,9 +157,9 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-# import dj_database_url
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
-#
-# import django_heroku
-# django_heroku.settings(locals())
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
+
+import django_heroku
+django_heroku.settings(locals())

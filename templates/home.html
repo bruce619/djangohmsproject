@@ -3,10 +3,26 @@
 {% block title %}home{% endblock %}
 
 {% block content %}
+			{% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="{% url 'home' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="{% url 'home' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+            {% endif %}
 			<!-- Banner -->
 				<section id="banner">
-					<h2 class="heading">Alpha</h2>
-					<p>Another fine responsive site template freebie by HTML5 UP.</p>
+					<h2 class="heading">HEALTH FOR ALL</h2>
+					<p>Creating, Managing and Securing Patients medical records for better and quicker health response</p>
 					<ul class="actions special">
 						<li><a href="#" class="button primary">Learn More</a></li>
 					</ul>
@@ -30,24 +46,24 @@
 						<div class="features-row">
 							<section>
 								<span class="icon solid major fa-bolt accent2"></span>
-								<h3>Magna etiam</h3>
+								<h3>Quick Response</h3>
 								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
 							</section>
 							<section>
 								<span class="icon solid major fa-chart-area accent3"></span>
-								<h3>Ipsum dolor</h3>
+								<h3>The right answers</h3>
 								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
 							</section>
 						</div>
 						<div class="features-row">
 							<section>
 								<span class="icon solid major fa-cloud accent4"></span>
-								<h3>Sed feugiat</h3>
+								<h3>Seamless care</h3>
 								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
 							</section>
 							<section>
 								<span class="icon solid major fa-lock accent5"></span>
-								<h3>Enim phasellus</h3>
+								<h3>Secured Medical Records</h3>
 								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
 							</section>
 						</div>
@@ -58,7 +74,7 @@
 
 							<section class="box special">
 								<span class="image featured"><img src="{% static 'css/images/medical.jpg' %}" alt="" /></span>
-								<h3>Sed lorem adipiscing</h3>
+								<h3>Special support service</h3>
 								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
 								<ul class="actions special">
 									<li><a href="#" class="button alt">Learn More</a></li>
@@ -70,7 +86,7 @@
 
 							<section class="box special">
 								<span class="image featured"><img src="{% static 'css/images/featured1.jpg' %}" alt="" /></span>
-								<h3>Accumsan integer</h3>
+								<h3>Medical Researches</h3>
 								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
 								<ul class="actions special">
 									<li><a href="#" class="button alt">Learn More</a></li>
@@ -85,16 +101,24 @@
 			<!-- CTA -->
 				<section id="cta">
 
-					<h2>Sign up for beta access</h2>
-					<p>Blandit varius ut praesent nascetur eu penatibus nisi risus faucibus nunc.</p>
+					<h2>Contact Us</h2>
+					<p>
+						You can contact us if you have any medical complaints or questions
+					</p>
 
 					<form>
 						<div class="row gtr-50 gtr-uniform">
-							<div class="col-8 col-12-mobilep">
-								<input type="email" name="email" id="email" placeholder="Email Address" />
+							<div class="col-6 col-12-mobilep">
+								<input type="text" name="name" id="name" placeholder="Name" required/>
 							</div>
-							<div class="col-4 col-12-mobilep">
-								<input type="submit" value="Sign Up" class="fit" />
+							<div class="col-6 col-12-mobilep">
+								<input type="email" name="email" id="email" placeholder="Email Address" required/>
+							</div>
+							<div class="col-12 col-12-mobilep">
+								<input type="text" name="message" id="message" placeholder="Message" required/>
+							</div>
+							<div class="col-12 col-12-mobilep">
+								<input type="submit" value="Send" class="fit" />
 							</div>
 						</div>
 					</form>

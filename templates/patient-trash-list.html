@@ -22,7 +22,6 @@
 <section>
     <div class="container">
         {% if object_list %}
-            {% for patient in object_list %}
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="table-responsive">
@@ -38,6 +37,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                {% for patient in object_list %}
                                         <tr>
                                             <td>
                                                 {{ patient.id }}
@@ -60,12 +60,12 @@
                                                 </a>
                                             </td>
                                         </tr>
+                                {% endfor %}
                                     </tbody>
                                 </table>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
         {% else %}
             <br>
             <p><b>Sorry, ID doesn't match any deleted patient</b></p>

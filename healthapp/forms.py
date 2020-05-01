@@ -47,3 +47,9 @@ class MedicalHistoryForm(forms.ModelForm):
             'created_on': 'Created On',
             'updated_on': 'Updated On',
         }
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100, required=True)
+    email = forms.EmailField(required=True)
+    message = forms.CharField(widget=forms.Textarea, required=True)
