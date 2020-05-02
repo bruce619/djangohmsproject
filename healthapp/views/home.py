@@ -31,7 +31,7 @@ def home(request):
                 "New contact form submission",
                 content,
                 "HEALTH FOR ALL" + '',
-                ['tipstar3@gmail.com'],
+                ['petrobruz@gmail.com'],
                 headers={'Reply-To': email}
             )
             email.send()
