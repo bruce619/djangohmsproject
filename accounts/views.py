@@ -74,6 +74,7 @@ class RegisterStaffUserView(CreateView):
             password = form.cleaned_data.get("password1")
             user.set_password(password)
             user.save()
+            sweetify.success(self.request, title='Account Created', icon='success', button='Ok', timer=3000)
             return redirect('home')
         else:
             return render(request, 'register.html', {'registration_form': form})
@@ -83,7 +84,6 @@ class RegisterStaffUserView(CreateView):
         return render(request, 'register.html', {'registration_form': form})
 
     def get_success_url(self):
-        sweetify.success(self.request, title='Account Created', icon='success', button='Ok', timer=3000)
         return reverse_lazy('home')
 
 

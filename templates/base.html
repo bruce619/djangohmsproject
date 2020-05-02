@@ -22,7 +22,7 @@
 								<li>
 									<a href="#" class="icon solid fa-angle-down">Layouts</a>
 									<ul>
-										{% if user.is_superuser %}
+										{% if user.is_superuser or user.is_admin %}
 											<li><a href="{% url 'edit-profile' %}"><i class="fa fa-user-circle"></i>My Profile</a></li>
 											<li><a href="{% url 'register' %}"><i class="fa fa-user-plus"></i>Create Staff</a></li>
 											<li><a href="{% url 'staff-list' %}"><i class="fas fa-list"></i> User List </a></li>
@@ -40,7 +40,7 @@
 													<li><a href="{% url 'medical-trash-list' %}"><i class="fa fa-trash" aria-hidden="true"></i>MedHistory Trash</a></li>
 												</ul>
 											</li>
-										{% elif user.is_staff %}
+										{% elif user.is_staff or user.is_admin %}
 										<li><a href="{% url 'edit-profile' %}"><i class="fa fa-user-circle"></i>My Profile</a></li>
 										<li>
 											<a href="#" class="icon solid fa-angle-down"> Patient</a>

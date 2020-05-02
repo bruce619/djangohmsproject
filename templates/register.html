@@ -4,6 +4,7 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+	{% if user.is_superuser or user.is_admin %}
 		<!-- Main -->
 		<section id="main" class="container medium">
 			<header>
@@ -46,9 +47,13 @@
 							<label>{{registration_form.email.label}}</label>
 							{{registration_form.email}}
 						</div>
-						<div class="col-12 col-12-narrower">
-							<input type="checkbox" id="is_staff" name="is_staff">
-							<label for="is_staff">Is a staff</label>
+						<div class="col-6 col-12-narrower">
+							<input type="checkbox" id="copy" name="is_staff" checked>
+							<label for="copy">Is a staff</label>
+						</div>
+						<div class="col-6 col-12-narrower">
+							<input type="checkbox" id="human" name="is_admin">
+							<label for="human">Is an admin</label>
 						</div>
 						<div class="col-6 col-12-mobilep">
 							<label>{{registration_form.password1.label}}</label>
@@ -68,6 +73,9 @@
 				</form>
 			</div>
 		</section>
+	{% else %}
+		<h2>You are not an admin </h2>
+	{% endif %}
 
 
 {% endblock %}

@@ -10,13 +10,14 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = Account
-        fields = ('first_name', 'last_name', 'username', 'email', 'is_staff', 'password1', 'password2', )
+        fields = ('first_name', 'last_name', 'username', 'email', 'is_staff', 'is_admin', 'password1', 'password2', )
         labels = {
             'first_name': 'First Name',
             'last_name': 'Last Name',
             'username': 'Username',
             'email': 'Email',
             'is_staff': 'Is a staff',
+            'is_admin': 'Is an Admin',
             'password1': 'Password',
             'password2': 'Confirm Password'
         }
@@ -41,6 +42,11 @@ class RegistrationForm(UserCreationForm):
                 }
             ),
             'is_staff': forms.CheckboxInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'is_admin': forms.CheckboxInput(
                 attrs={
                     'class': 'form-control',
                 }
