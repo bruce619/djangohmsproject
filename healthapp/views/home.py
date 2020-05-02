@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from healthapp.forms import ContactForm
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
+import sweetify
 
 
 def home(request):
@@ -35,6 +36,7 @@ def home(request):
                 headers={'Reply-To': email}
             )
             email.send()
+            sweetify.success(request, title='Sent', icon='success', button='Ok', timer=3000)
             return redirect('home')
     return render(request, 'home.html', {'form': form_class})
 
