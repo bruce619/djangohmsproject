@@ -3,22 +3,6 @@
 {% block title %}home{% endblock %}
 
 {% block content %}
-			{% if form.errors %}
-                {% for field in form %}
-                    {% for error in field.errors %}
-                        <div class="alert alert-danger alert-dismissable">
-                            <a href="{% url 'home' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                            <strong>{{ error|escape }}</strong>
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-                {% for error in form.non_field_errors %}
-                    <div class="alert alert-danger alert-dismissable">
-                        <a href="{% url 'home' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>{{ error|escape }}</strong>
-                    </div>
-                {% endfor %}
-            {% endif %}
 			<!-- Banner -->
 				<section id="banner">
 					<h2 class="heading">HEALTH FOR ALL</h2>
@@ -74,7 +58,7 @@
 
 							<section class="box special">
 								<span class="image featured"><img src="{% static 'css/images/medical.jpg' %}" alt="" /></span>
-								<h3>Special support service</h3>
+								<h3>Support service</h3>
 								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
 								<ul class="actions special">
 									<li><a href="#" class="button alt">Learn More</a></li>
@@ -86,7 +70,7 @@
 
 							<section class="box special">
 								<span class="image featured"><img src="{% static 'css/images/featured1.jpg' %}" alt="" /></span>
-								<h3>Medical Researches</h3>
+								<h3>Medical Research</h3>
 								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
 								<ul class="actions special">
 									<li><a href="#" class="button alt">Learn More</a></li>
@@ -100,6 +84,22 @@
 
 			<!-- CTA -->
 				<section id="cta">
+					{% if form.errors %}
+						{% for field in form %}
+							{% for error in field.errors %}
+								<div class="alert alert-danger alert-dismissable">
+									<a href="{% url 'home' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+									<strong>{{ error|escape }}</strong>
+								</div>
+							{% endfor %}
+						{% endfor %}
+						{% for error in form.non_field_errors %}
+							<div class="alert alert-danger alert-dismissable">
+								<a href="{% url 'home' %}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<strong>{{ error|escape }}</strong>
+							</div>
+						{% endfor %}
+					{% endif %}
 
 					<h2>Contact Us</h2>
 					<p>

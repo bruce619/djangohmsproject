@@ -26,6 +26,7 @@ SECRET_KEY = 'r-6%7e1^kzo^ashkqa3jrqeyi0_##p&qm79(oczb!!5sob+6#6'
 # DEBUG = True
 DEBUG = False
 
+# ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['127.0.0.1', 'djangohealthforall.herokuapp.com']
 
 
@@ -155,6 +156,12 @@ LOGOUT_REDIRECT_URL = "login"
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+EMAIL_HOST = ''
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
 
 
 import dj_database_url
