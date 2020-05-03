@@ -32,6 +32,7 @@ def home(request):
                 )
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
+            sweetify.success(request, title='Sent', icon='success', button='Ok', timer=3000)
             return redirect('home')
 
     return render(request, 'home.html', {'form': form})
