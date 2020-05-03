@@ -1,25 +1,20 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from healthapp.forms import ContactForm
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import get_template
 import sweetify
 
 
 def home(request):
-    form_class = ContactForm
-    # new logic!
-    if request.method == 'POST':
-        form = form_class(data=request.POST)
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
         if form.is_valid():
-            name = request.POST.get(
-                'name'
-                , '')
-            email = request.POST.get(
-                'email'
-                , '')
-            message = request.POST.get('message', '')
-            # Email the profile with the
-            # contact information
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
             template = get_template('contact_template.txt')
             context = {
                 'name': name,
@@ -27,18 +22,19 @@ def home(request):
                 'message': message,
             }
             content = template.render(context)
-
-            email = EmailMessage(
-                "New contact form submission",
-                content,
-                "HEALTH FOR ALL" + '',
-                ['petrobruz@gmail.com'],
-                headers={'Reply-To': email}
-            )
-            email.send()
-            sweetify.success(request, title='Sent', icon='success', button='Ok', timer=3000)
+            try:
+                send_mail(
+                    "New contact form submission",
+                    content,
+                    "HEALTHFORALL" + '',
+                    ['petrobruz@gmail.com'],
+                    fail_silently=False,
+                )
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
             return redirect('home')
-    return render(request, 'home.html', {'form': form_class})
+
+    return render(request, 'home.html', {'form': form})
 
 
 def error_404(request, exception):
