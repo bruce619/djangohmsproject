@@ -27,7 +27,7 @@ SECRET_KEY = 'r-6%7e1^kzo^ashkqa3jrqeyi0_##p&qm79(oczb!!5sob+6#6'
 DEBUG = False
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['127.0.0.1', 'djangohealthforall.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'djangohealthforall.herokuapp.com']
 
 
 # Application definition
